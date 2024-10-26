@@ -1,0 +1,56 @@
+body {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ",
+    Meiryo, "ＭＳ ゴシック", "MS Gothic", sans-serif;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* padding: 0 12px 0 12px; */
+}
+
+.header__main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__main .padding {
+  width: 64px;
+}
+
+/* .header__main .title {
+  font-family: "すずむし", Suzumushi;
+} */
+
+.header__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  background-color: #c75b72;
+}
+
+.header__links a {
+  color: white;
+}
+
+#pickup-menus {
+  display: flex;
+  gap: 16px;
+}
+
+#news {
+  width: 80%;
+  margin: auto;
+}
+
+.news__item {
+  margin-bottom: 36px;
+}
