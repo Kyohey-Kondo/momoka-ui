@@ -14,7 +14,7 @@ const fetchMenus = async () => {
 }
 
 
-const render = async () => {
+const renderContents = async () => {
   const menus = await fetchMenus();
   const pickupMenus = menus.filter(menu => menu.pickup);
   const pickupMenusContainer = document.getElementById("pickup-menus");
@@ -31,15 +31,39 @@ const render = async () => {
 }
 
 
+let isAutoScroll = true;
+let scrollInterval;
+const pickupMenusContainer = document.getElementById("pickup-menus");
+const startAutoScroll = () => {
+  const scrollSpeed = 2;
+  console.log(pickupMenusContainer.scrollLeft);
+  console.log(pickupMenusContainer.scrollWidth);
+  console.log(pickupMenusContainer.clientWidth);
+
+  // auto scroll peroiodically
+  scrollInterval = setInterval(() => {
+    if (isAutoScroll) {
+      pickupMenusContainer.scrollLeft += scrollSpeed;
+      if (pickupMenusContainer.scrollLeft + pickupMenusContainer.clientWidth >= pickupMenusContainer.scrollWidth) {
+        pickupMenusContainer.scrollLeft = 0;
+      }
+    }
+  }, 50);
+}
+
+const stopAutoScroll = () => {
+  isAutoScroll = false;
+  clearInterval(scrollInterval);
+}
+
+pickupMenusContainer.addEventListener("mouseover", stopAutoScroll);
+pickupMenusContainer.addEventListener("mouseout", startAutoScroll);
+
+const render = async () => {
+  await renderContents();
+  startAutoScroll();
+}
 
 render();
 
-
-// const renderPickupMenus = (menus) => {
-//   const pickupMenus = menus.filter(menu => menu.pickup);
-//   console.log(pickupMenus);
-// }
-
-
-// const menu = await fetchMenus();
 
