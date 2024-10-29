@@ -36,10 +36,6 @@ let scrollInterval;
 const pickupMenusContainer = document.getElementById("pickup-menus");
 const startAutoScroll = () => {
   const scrollSpeed = 2;
-  console.log(pickupMenusContainer.scrollLeft);
-  console.log(pickupMenusContainer.scrollWidth);
-  console.log(pickupMenusContainer.clientWidth);
-
   // auto scroll peroiodically
   scrollInterval = setInterval(() => {
     if (isAutoScroll) {
