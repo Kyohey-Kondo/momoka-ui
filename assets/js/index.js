@@ -52,8 +52,13 @@ const stopAutoScroll = () => {
   clearInterval(scrollInterval);
 }
 
+// For mouse devices
 pickupMenusContainer.addEventListener("mouseover", stopAutoScroll);
 pickupMenusContainer.addEventListener("mouseout", startAutoScroll);
+
+// For touch devices
+pickupMenusContainer.addEventListener("touchstart", stopAutoScroll);
+pickupMenusContainer.addEventListener("touchend", startAutoScroll);
 
 const render = async () => {
   await renderContents();
