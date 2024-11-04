@@ -20,7 +20,7 @@ const renderContents = async () => {
   const pickupMenusContainer = document.getElementById("pickup-menus");
   pickupMenus.forEach(menu => {
     const div = document.createElement("div");
-    // add style to div
+    div.classList.add("pickup-menu");
     div.innerHTML = `
       <img height=300px src="${menu.image.url}" alt="${menu.title}">
       <p>${menu.title}</p>
@@ -34,13 +34,13 @@ const renderContents = async () => {
 let isAutoScroll = true;
 let scrollInterval;
 const pickupMenusContainer = document.getElementById("pickup-menus");
-const startAutoScroll = () => {
+const startAutoScroll = async () => {
   const scrollSpeed = 2;
-  // auto scroll peroiodically
   scrollInterval = setInterval(() => {
     if (isAutoScroll) {
       pickupMenusContainer.scrollLeft += scrollSpeed;
-      if (pickupMenusContainer.scrollLeft + pickupMenusContainer.clientWidth >= pickupMenusContainer.scrollWidth) {
+      if (pickupMenusContainer.scrollLeft == pickupMenusContainer.clientWidth) {
+        isAutoScroll = false;
         pickupMenusContainer.scrollLeft = 0;
       }
     }
@@ -60,9 +60,27 @@ pickupMenusContainer.addEventListener("mouseout", startAutoScroll);
 pickupMenusContainer.addEventListener("touchstart", stopAutoScroll);
 pickupMenusContainer.addEventListener("touchend", startAutoScroll);
 
+
+const body = document.getElementsByTagName("body")[0];
+
+
+const displayContents = async () => {
+  window.addEventListener('load', () => {
+    const logoOverlay = document.getElementById('logo-overlay');
+    const mainContent = document.getElementById('main-content');
+    logoOverlay.addEventListener('animationend', () => {
+      mainContent.style.display = 'block';
+    });
+  });
+}
+
+
 const render = async () => {
   await renderContents();
-  startAutoScroll();
+  await displayContents();
+  // wait two seconds before starting auto scroll
+  await new Promise(resolve => setTimeout(resolve, 1300));
+  await startAutoScroll();
 }
 
 render();
